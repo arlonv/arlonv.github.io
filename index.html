@@ -1,0 +1,373 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ARLON</title>
+<link href="./arlon/style.css" rel="stylesheet">
+<script type="text/javascript" src="./arlon/jquery.mlens-1.0.min.js"></script> 
+<script type="text/javascript" src="./arlon/jquery.js"></script>
+
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<!-- <title></title>   -->
+<style>
+        .caption {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50x; /* 调整视频之间的间隙 */
+        }
+
+        /* .row {
+            display: flex;
+            width: 100%;
+            align-items: center;
+        }   */
+  
+        .row {  
+            display: flex;  
+            align-items: center; /* 垂直居中 */  
+            justify-content: center; /* 水平居中 */  
+        }  
+
+        .row2 {  
+            display: flex;  
+            align-items: center; /* 垂直居中 */  
+            justify-content: center; /* 水平居中 */  
+        }  
+
+        .row3 {  
+            display: flex;  
+        }  
+        .column {  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+        }  
+  
+
+        .label {  
+            writing-mode: vertical-lr;  /* 竖排文字 */  
+            text-align: center;  
+            margin-right: 30px; /* 调整标签和视频之间的间隙 */  
+            transform: rotate(180deg); /* 旋转180度，使文字方向朝左边 */
+        }  
+        .label_method {  
+            text-align: center;  
+            font-size: 16px; /* 调整字体大小 */  
+        }  
+  
+        .video-wrapper {  
+            display: flex;  
+            gap: 60px; /* 调整视频之间的间隙 */  
+        }  
+        .video-wrapper2 {  
+            display: flex;  
+            gap: 100px; /* 调整视频之间的间隙 */  
+        }  
+        .video-wrapper video {  
+            width: 200px; /* 根据需要调整视频宽度 */  
+            margin-top: 10px; /* 调整视频上下间隙 */  
+            margin-bottom: 10px; /* 调整视频上下间隙 */  
+        } 
+        .video-wrapper2 video {  
+            width: 200px; /* 根据需要调整视频宽度 */  
+            margin-top: 10px; /* 调整视频上下间隙 */  
+            margin-bottom: 10px; /* 调整视频上下间隙 */  
+        } 
+
+        /* .video-column, .text-column {  
+            flex: 1;  
+            text-align: center;  
+            margin: 5px;  
+        }   */
+        .text-wrapper {  
+            display: flex;  
+            justify-content: space-between;  
+            flex-wrap: wrap;  
+            gap: 10px; /* Optional: Adds space between columns */  
+            margin-left: 20px; /* Adjust this value to set the left margin */  
+        }  
+        .text-column {  
+            flex: 1;  
+            width: 210px; /* Adjust based on your preference */  
+            padding-left: 30px;  
+            box-sizing: border-box;  
+        }  
+        .text-column2 {  
+            flex: 1;  
+            width: 210px; /* Adjust based on your preference */  
+            /* padding: 30px;   */
+            padding-left: 70px;
+            box-sizing: border-box;  
+        }  
+        .text-column3 {  
+            flex: 1;  
+            width: 210px; /* Adjust based on your preference */  
+            /* padding: 30px;   */
+            padding-left:70px;
+            box-sizing: border-box;  
+        }  
+        .text-column_line {  
+            flex: 1;  
+            /* padding: 30px;   */
+            padding-left: 30px;
+            box-sizing: border-box;  
+        }  
+        .text-column-ref1 {  
+            flex: 1;  
+            /* padding: 30px;   */
+            width: 50px; /* Adjust based on your preference */  
+            padding-left: 400px;
+            box-sizing: border-box;  
+        }  
+        .text-column-ref2 {  
+            flex: 1;  
+            /* padding: 30px;   */
+            width: 50px; /* Adjust based on your preference */  
+            padding-left: 10px;
+            box-sizing: border-box;  
+        }  
+        #authors {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 20px;
+        }
+</style>  
+</head>
+
+<body>
+<div class="content">
+  <h1><strong>ARLON: Boosting Diffusion Transformers With Autoregressive Models for Long Video Generation</strong></h1>
+  <!-- <img src="./arlon/teaser_static.jpg" class="teaser-gif" style="width:100%;"><br>
+  <h3 style="text-align:center"><em>It’s like a photo booth, but once the subject is captured, it can be synthesized wherever your dreams take you…</em></h3>
+    <font size="+2">
+          <p style="text-align: center;">
+            <a href="https://arxiv.org/abs/2208.12242" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+	    (<font color="#C70039">new!</font>) <a href="https://github.com/google/dreambooth" target="_blank">[Dataset]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="arlon/bibtex.txt" target="_blank">[BibTeX]</a>
+          </p>
+    </font> -->
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Abstract</h2>
+  <p>Text-to-video (T2V) models have recently undergone rapid and substantial advancements. Nevertheless, due to limitations in data and computational resources, achieving efficient generation of long videos with rich motion dynamics remains a significant challenge. To generate high-quality, dynamic, and temporally consistent long videos, this paper presents ARLON,  a novel framework that boosts diffusion Transformers with autoregressive (<b>AR</b>) models for long (<b>LON</b>) video generation, by integrating the coarse spatial and long-range temporal information provided by the AR model to guide the DiT model effectively. Specifically, ARLON incorporates several key innovations: 1) A latent Vector Quantized Variational Autoencoder (VQ-VAE) compresses the input latent space of the DiT model into compact and highly quantized visual tokens, bridging the AR and DiT models and balancing the learning complexity and information density; 2) An adaptive norm-based semantic injection module integrates the coarse discrete visual units from the AR model into the DiT model, ensuring effective guidance during video generation; 3) To enhance the tolerance capability of noise introduced from the AR inference, the DiT model is trained with coarser visual latent tokens incorporated with an uncertainty sampling module. Experimental results demonstrate that ARLON significantly outperforms the baseline OpenSora-V1.2 on eight out of eleven metrics selected from VBench, with notable improvements in dynamic degree and aesthetic quality, while delivering competitive results on the remaining three and simultaneously accelerating the generation process. In addition, ARLON achieves state-of-the-art performance in long video generation, outperforming other open-source models in this domain. Detailed analyses of the improvements in inference efficiency are presented, alongside a practical application that demonstrates the generation of long videos using progressive text prompts.</p>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Method</h2>
+  <p> Our method first generates long-term, coarse-grained discrete visual units (AR codes) autoregressively using a decoder-only Transformer. These discrete AR codes are then segmented and sequentially fed into the DiT model by the proposed semantic injection module, which autoregressively generates high-quality video segments.</p>
+  <br>
+  <img class="summary-img" src="./arlon/generation_process.png" style="width:80%;"> <br>
+  <p>Given a text prompt, the autoregressive (AR) model predicts coarse visual latent tokens, which are constructed from a 3D VAE encoder followed by a latent VQ-VAE encoder based on the target video. These predicted visual latent tokens encapsulate both the coarse spatial information and consistent semantic information. Based on these tokens, a latent VQ-VAE decoder generates continuous latent features, which serve as semantic conditions to guide the DiT model with a semantic injection module. To mitigate the noise inevitably introduced during AR inference, we introduce two noise-robust training strategies: 1) coarser visual latent tokens, and 2) uncertainty sampling module.</p>
+  <br>
+  <img class="summary-img" src="./arlon/framework.png" style="width:80%;"> <br>
+</div>
+
+
+
+<div class="content video-container">  
+  <h2 style="text-align:center;">Text-to-Video Results</h2>
+    <div class="row">  
+        <div class="label">OpenSora</div>  
+        <div class="video-wrapper">  
+            <video controls src="./arlon/sample_0005_baseline.mp4"></video>  
+            <video controls src="./arlon/sample_0073_baseline.mp4"></video>  
+            <video controls src="./arlon/sample_0007_baseline.mp4"></video>  
+            <video controls src="./arlon/sample_0026_baseline.mp4"></video>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="label">ARLON</div>
+        <div class="video-wrapper">
+            <video controls src="./arlon/sample_0005.mp4"></video>
+            <video controls src="./arlon/sample_0073.mp4"></video>
+            <video controls src="./arlon/sample_0007.mp4"></video>
+            <video controls src="./arlon/sample_0026.mp4"></video>
+        </div>
+    </div>
+    <div class="row">  
+        <div class="text-column">  
+            "A high-quality 3D render of a female character with curly blonde hair and striking blue eyes, wearing a black tank top, standing before a dramatic, fiery backdrop, with a serious expression and detailed, realistic lighting."
+        </div>  
+        <div class="text-column2">  
+            "A cute happy Corgi playing in park, sunset"
+        </div>  
+        <div class="text-column3">  
+            "A tranquil coastal beach in spring with golden sands and lush green cliffs is suddenly disrupted by intense shaking, turning rhythmic waves chaotic, creating a surreal visual experience"
+        </div>  
+        <div class="text-column2">  
+            "Misty mountains at sunrise, with the sun casting a warm glow. Dense fog adds mystery, while a calm river winds through the scene. Cool colors contrast with the warm light. The video focuses on the untouched natural beauty, free of text or human activity."  
+        </div>  
+    </div>
+
+</div>
+
+
+<div class="content video-container">  
+  <h2 style="text-align:center;">Long Video Results</h2>
+  <div class="row2 video-wrapper">  
+    <div class="column">  
+        <div class="label_method">StreamingT2V</div>  
+        <video controls src="./arlon/st2v_22.mp4"></video>  
+    </div>
+    <div class="column">
+        <div class="label_method">FreeNoise</div>
+        <video controls src="./arlon/free_noise_22.mp4"></video>
+    </div>
+    <div class="column">
+        <div class="label_method">OpenSora</div>
+        <video controls src="./arlon/baseline_22.mp4"></video>
+    </div>
+    <div class="column">
+      <div class="label_method">ARLON</div>
+      <video controls src="./arlon/sample_0022_1.mp4"></video>
+  </div>
+</div>
+<div class="text-column_line">  
+    "A teddy bear is swimming in the ocean."  
+</div>  
+<div class="row2 video-wrapper">  
+    <div class="column">
+        <video controls src="./arlon/aquarium_st2v.mp4"></video>
+    </div>
+    <div class="column">
+        <video controls src="./arlon/free_noise0003.mp4"></video>  
+    </div>  
+    <div class="column">  
+        <video controls src="./arlon/sample_0002_baseline.mp4"></video>  
+    </div>  
+    <div class="column">  
+      <video controls src="./arlon/aquarium-0.mp4"></video>  
+  </div>  
+</div>
+<div class="text-column_line">  
+"In a mesmerizing underwater world, vibrant coral reefs teem with life, their colors ranging from deep purples to bright oranges. Schools of tropical fish, including angelfish, clownfish, and tangs, dart gracefully through the water, their scales shimmering in the filtered sunlight"
+</div>  
+</div>
+
+
+
+<div class="content video-container">  
+  <h2 style="text-align:center;">Progressive Prompts Results</h2>
+  <div class="row2 video-wrapper">
+    <div class="column">  
+        <div class="label_method">StreamingT2V</div>
+        <video controls src="./arlon/st2v2_2.mp4"></video>
+    </div>  
+    <div class="column">  
+        <div class="label_method">FreeNoise</div>  
+        <video controls src="./arlon/0002.mp4"></video>  
+    </div>  
+    <div class="column">  
+        <div class="label_method">OpenSora</div>  
+        <video controls src="./arlon/sample_0000_baseline.mp4"></video>  
+    </div>  
+    <div class="column">  
+      <div class="label_method">ARLON</div>  
+      <video controls src="./arlon/sample_0001.mp4"></video>  
+  </div>  
+</div>
+<div class="text-column_line">  
+Prompt1: "A majestic dormant volcano rises in the center of a tranquil landscape, with its rugged slopes contrasting the lush forest below, set against clear skies and rolling hills, evoking a sense of solitude and timeless serenity."
+</div>  
+
+<div class="text-column_line">  
+Prompt2: "An erupting volcano dominates the scene, with fiery lava and ash contrasting the lush forest below, as dark clouds and lightning fill the sky,  capturing the chaos and power of nature's fury"
+</div>  
+
+    <!-- <div class="row">  
+        <div class="label">ours</div>  
+        <div class="video-wrapper">  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+        </div>  
+    </div>   -->
+</div> 
+
+<div class="content">
+  <h2 style="text-align:center;">Denoising Step Results</h2>
+  <br>
+  <img class="summary-img" src="./arlon/step1.png" style="width:100%;"> <br>
+</div>
+
+
+<div class="content video-container">  
+  <h2 style="text-align:center;">  Video Condition Generation of ARLON </h2>
+  <div class="row2 video-wrapper2">  
+    <div class="column">  
+        <div class="label_method">Condition Video</div>  
+        <video controls src="./arlon/Media2.mp4"></video>  
+    </div>  
+    <div class="column">  
+        <div class="label_method">Generated Video1</div>  
+        <video controls src="./arlon/Media1.mp4"></video>  
+    </div>  
+    <div class="column">  
+      <div class="label_method">Generated Video2</div>  
+      <video controls src="./arlon/Media3.mp4"></video>  
+  </div>  
+
+</div> 
+<div class="row3">  
+    <div class="text-column-ref1">  
+        "A bearded man with short hair, wearing sunglasses and a black leather jacket with red lining, looks upwards seriously in a close-up portrait against a green-to-blue gradient background, suggesting nighttime."
+    </div>  
+    <div class="text-column-ref2">  
+        "A high-quality 3D render of a female character with curly blonde hair and striking blue eyes, wearing a black tank top, standing before a dramatic, fiery backdrop, with a serious expression and detailed, realistic lighting."
+    </div>  
+  </div>
+
+
+<!-- 
+<div class="content video-container">  
+  <h2 style="text-align:center;">Denoising step Results</h2>
+    <div class="row">  
+        <div class="label">baseline</div>  
+        <div class="video-wrapper">  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+        </div>  
+    </div>  
+    <div class="row">  
+        <div class="label">ours</div>  
+        <div class="video-wrapper">  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+            <video controls src="./arlon/aquarium-0.mp4"></video>  
+        </div>  
+    </div>  
+</div>   -->
+<!-- 
+<div class="content">
+  <h2>Results</h2>
+  <p>Results for re-contextualization of a bag and vase subject instances. By finetuning a model using our method we are able to generate different images of the a subject instance in different environments, with high preservation of subject details and realistic interaction between the scene and the subject. We display the conditioning prompts below each image. </p>
+<img class="summary-img" src="./arlon/results.png" style="width:100%;">
+</div>
+
+<div class="content">
+  <h2>Art Rendition</h2>
+  <p>Original artistic renditions of our subject dog in the style of famous painters. We remark that many of the generated poses were not seen in the training set, such as the Van Gogh and Warhol rendition. We also note that some renditions seem to have novel composition and faithfully imitate the style of the painter - even suggesting some sort of creativity (extrapolation given previous knowledge).</p>
+  <br>
+  <img class="summary-img" src="./arlon/art.png" style="width:100%;"> <br>
+</div>
+
+<div class="content">
+  <h2>Text-Guided View Synthesis</h2>
+  <p>Our technique can synthesized images with specified viewpoints for a subject cat (left to right: top, bottom, side and back views). Note that the generated poses are  different from the input poses, and the background changes in a realistic manner given a pose change. We also highlight the preservation of complex fur patterns on the subject cat's forehead.</p>
+  <br>
+  <img class="summary-img" src="./arlon/novel_views.png" style="width:100%;"> <br>
+</div>
+<div class="content">
+  <h2>Property Modification</h2>
+  <p>We show color modifications in the first row (using prompts ``a [color] [V] car''), and crosses between a specific dog and different animals in the second row (using prompts ``a cross of a [V] dog and a [target species]''). We highlight the fact that our method preserves unique visual features that give the subject its identity or essence, while performing the required property modification.</p>
+  <br>
+  <img class="summary-img" src="./arlon/property_modification.png" style="width:100%;"> <br>
+</div> -->
+
+</body>
+</html>
