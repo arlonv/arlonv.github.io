@@ -163,10 +163,53 @@
   <img class="summary-img" src="./arlon/generation_process.png" style="width:80%;"> <br>
   <p>Given a text prompt, the autoregressive (AR) model predicts coarse visual latent tokens, which are constructed from a 3D VAE encoder followed by a latent VQ-VAE encoder based on the target video. These predicted visual latent tokens encapsulate both the coarse spatial information and consistent semantic information. Based on these tokens, a latent VQ-VAE decoder generates continuous latent features, which serve as semantic conditions to guide the DiT model with a semantic injection module. To mitigate the noise inevitably introduced during AR inference, we introduce two noise-robust training strategies: 1) coarser visual latent tokens, and 2) uncertainty sampling module.</p>
   <br>
-  <img class="summary-img" src="./arlon/framework.png" style="width:80%;"> <br>
+  <img class="summary-img" src="./arlon/framework_final.png" style="width:80%;"> <br>
 </div>
 
 
+
+<div class="content video-container">  
+    <h2 style="text-align:center;">Long Video Results</h2>
+    <div class="row2 video-wrapper">  
+      <div class="column">  
+          <div class="label_method">StreamingT2V</div>  
+          <video controls src="./arlon/st2v_22.mp4"></video>  
+      </div>
+      <div class="column">
+          <div class="label_method">FreeNoise</div>
+          <video controls src="./arlon/free_noise_22.mp4"></video>
+      </div>
+      <div class="column">
+          <div class="label_method">OpenSora</div>
+          <video controls src="./arlon/baseline_22.mp4"></video>
+      </div>
+      <div class="column">
+        <div class="label_method">ARLON</div>
+        <video controls src="./arlon/sample_0022_1.mp4"></video>
+    </div>
+  </div>
+  <div class="text-column_line">  
+      "A teddy bear is swimming in the ocean."  
+  </div>  
+  <div class="row2 video-wrapper">  
+      <div class="column">
+          <video controls src="./arlon/aquarium_st2v.mp4"></video>
+      </div>
+      <div class="column">
+          <video controls src="./arlon/free_noise0003.mp4"></video>  
+      </div>  
+      <div class="column">  
+          <video controls src="./arlon/sample_0002_baseline.mp4"></video>  
+      </div>  
+      <div class="column">  
+        <video controls src="./arlon/aquarium-0.mp4"></video>  
+    </div>  
+  </div>
+  <div class="text-column_line">  
+  "In a mesmerizing underwater world, vibrant coral reefs teem with life, their colors ranging from deep purples to bright oranges. Schools of tropical fish, including angelfish, clownfish, and tangs, dart gracefully through the water, their scales shimmering in the filtered sunlight"
+  </div>  
+</div>
+  
 
 <div class="content video-container">  
   <h2 style="text-align:center;">Text-to-Video Results</h2>
@@ -203,49 +246,6 @@
         </div>  
     </div>
 
-</div>
-
-
-<div class="content video-container">  
-  <h2 style="text-align:center;">Long Video Results</h2>
-  <div class="row2 video-wrapper">  
-    <div class="column">  
-        <div class="label_method">StreamingT2V</div>  
-        <video controls src="./arlon/st2v_22.mp4"></video>  
-    </div>
-    <div class="column">
-        <div class="label_method">FreeNoise</div>
-        <video controls src="./arlon/free_noise_22.mp4"></video>
-    </div>
-    <div class="column">
-        <div class="label_method">OpenSora</div>
-        <video controls src="./arlon/baseline_22.mp4"></video>
-    </div>
-    <div class="column">
-      <div class="label_method">ARLON</div>
-      <video controls src="./arlon/sample_0022_1.mp4"></video>
-  </div>
-</div>
-<div class="text-column_line">  
-    "A teddy bear is swimming in the ocean."  
-</div>  
-<div class="row2 video-wrapper">  
-    <div class="column">
-        <video controls src="./arlon/aquarium_st2v.mp4"></video>
-    </div>
-    <div class="column">
-        <video controls src="./arlon/free_noise0003.mp4"></video>  
-    </div>  
-    <div class="column">  
-        <video controls src="./arlon/sample_0002_baseline.mp4"></video>  
-    </div>  
-    <div class="column">  
-      <video controls src="./arlon/aquarium-0.mp4"></video>  
-  </div>  
-</div>
-<div class="text-column_line">  
-"In a mesmerizing underwater world, vibrant coral reefs teem with life, their colors ranging from deep purples to bright oranges. Schools of tropical fish, including angelfish, clownfish, and tangs, dart gracefully through the water, their scales shimmering in the filtered sunlight"
-</div>  
 </div>
 
 
